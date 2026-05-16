@@ -76,7 +76,7 @@ namespace MailKit.Net.Smtp {
 	{
 		static readonly byte[] EndData = Encoding.ASCII.GetBytes (".\r\n");
 		static readonly char[] NewLineCharacters = { '\r', '\n' };
-		internal static string DefaultLocalDomain;
+		internal static readonly string DefaultLocalDomain;
 		const int MaxLineLength = 998;
 
 		enum SmtpCommand {
@@ -672,7 +672,7 @@ namespace MailKit.Net.Smtp {
 		struct QueueResults
 		{
 			public readonly int RecipientsAccepted;
-			public Exception? FirstException;
+			public readonly Exception? FirstException;
 
 			public QueueResults (int recipientsAccepted, Exception? firstException)
 			{

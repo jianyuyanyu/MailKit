@@ -1146,7 +1146,7 @@ namespace MailKit.Net.Imap {
 			if (parent == null)
 				throw new ArgumentNullException (nameof (parent));
 
-			if (parent == this)
+			if (object.ReferenceEquals (parent, this))
 				throw new ArgumentException ("Cannot rename a folder using itself as the new parent folder.", nameof (parent));
 
 			if (parent is not ImapFolder || ((ImapFolder) parent).Engine != Engine)

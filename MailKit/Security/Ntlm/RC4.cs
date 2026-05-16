@@ -34,14 +34,13 @@ namespace MailKit.Security.Ntlm {
 
 	class RC4 : SymmetricAlgorithm, ICryptoTransform
 	{
-		byte[] state;
+		readonly byte[] state = new byte[256];
 		byte[]? key;
 		byte x, y;
 		bool disposed;
 
 		public RC4 () : base ()
 		{
-			state = new byte[256];
 			KeySizeValue = 64;
 		}
 
@@ -110,7 +109,7 @@ namespace MailKit.Security.Ntlm {
 			KeySetup (key);
 		}
 
-		void KeySetup (byte[] key)
+		void KeySetup (byte[] keyData)
 		{
 			byte index1 = 0;
 			byte index2 = 0;
@@ -121,12 +120,12 @@ namespace MailKit.Security.Ntlm {
 			x = y = 0;
 
 			for (int counter = 0; counter < 256; counter++) {
-				index2 = (byte) (key[index1] + state[counter] + index2);
+				index2 = (byte) (keyData[index1] + state[counter] + index2);
 				// swap byte
 				byte tmp = state[counter];
 				state[counter] = state[index2];
 				state[index2] = tmp;
-				index1 = (byte) ((index1 + 1) % key.Length);
+				index1 = (byte) ((index1 + 1) % keyData.Length);
 			}
 		}
 

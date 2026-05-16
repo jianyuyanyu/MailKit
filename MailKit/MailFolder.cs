@@ -135,7 +135,7 @@ namespace MailKit {
 		public IMailFolder? ParentFolder {
 			get { return parent; }
 			internal protected set {
-				if (value == parent)
+				if (object.ReferenceEquals (value, parent))
 					return;
 
 				if (parent != null)

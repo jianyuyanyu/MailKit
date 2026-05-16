@@ -393,9 +393,10 @@ namespace MailKit.Security
 					Credential = new NetworkCredential ("username", "password"),
 					Package = mechanismName,
 				};
-				var negotiate = new NegotiateAuthentication (options);
+				NegotiateAuthenticationStatusCode statusCode;
 
-				negotiate.GetOutgoingBlob (Array.Empty<byte> (), out NegotiateAuthenticationStatusCode statusCode);
+				using (var negotiate = new NegotiateAuthentication (options))
+					negotiate.GetOutgoingBlob (Array.Empty<byte> (), out statusCode);
 
 				return statusCode == NegotiateAuthenticationStatusCode.Completed;
 			} catch {

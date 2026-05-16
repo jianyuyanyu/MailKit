@@ -294,24 +294,19 @@ namespace MailKit.Net.Proxy {
 			try {
 				ssl.Write (command, 0, command.Length);
 
-				var builder = new ByteArrayBuilder (256);
+				using var builder = new ByteArrayBuilder (256);
 				var buffer = new byte[1];
 				var newline = false;
-				string response;
 
-				try {
-					// read until we consume the end of the headers
-					do {
-						int nread = ssl.Read (buffer, 0, 1);
+				// read until we consume the end of the headers
+				do {
+					int nread = ssl.Read (buffer, 0, 1);
 
-						if (nread < 1 || HttpProxyClient.TryConsumeHeaders (builder, buffer[0], ref newline))
-							break;
-					} while (true);
+					if (nread < 1 || HttpProxyClient.TryConsumeHeaders (builder, buffer[0], ref newline))
+						break;
+				} while (true);
 
-					response = builder.ToString ();
-				} finally {
-					builder.Dispose ();
-				}
+				var response = builder.ToString ();
 
 				HttpProxyClient.ValidateHttpResponse (response, host, port);
 				return ssl;
@@ -375,24 +370,19 @@ namespace MailKit.Net.Proxy {
 			try {
 				await ssl.WriteAsync (command, 0, command.Length, cancellationToken).ConfigureAwait (false);
 
-				var builder = new ByteArrayBuilder (256);
+				using var builder = new ByteArrayBuilder (256);
 				var buffer = new byte[1];
 				var newline = false;
-				string response;
 
-				try {
-					// read until we consume the end of the headers
-					do {
-						int nread = ssl.Read (buffer, 0, 1);
+				// read until we consume the end of the headers
+				do {
+					int nread = ssl.Read (buffer, 0, 1);
 
-						if (HttpProxyClient.TryConsumeHeaders (builder, buffer[0], ref newline))
-							break;
-					} while (true);
+					if (HttpProxyClient.TryConsumeHeaders (builder, buffer[0], ref newline))
+						break;
+				} while (true);
 
-					response = builder.ToString ();
-				} finally {
-					builder.Dispose ();
-				}
+				var response = builder.ToString ();
 
 				HttpProxyClient.ValidateHttpResponse (response, host, port);
 				return ssl;

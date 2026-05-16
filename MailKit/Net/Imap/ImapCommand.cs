@@ -422,7 +422,7 @@ namespace MailKit.Net.Imap {
 
 				eoln = true;
 
-				return length++;
+				return length;
 			case ImapStringType.QString:
 				return Encoding.UTF8.GetByteCount (MimeUtils.Quote (value));
 			case ImapStringType.Nil:

@@ -54,8 +54,8 @@ namespace MailKit {
 		static readonly UniqueIdRange Invalid = new UniqueIdRange ();
 
 		readonly uint validity;
-		internal uint start;
-		internal uint end;
+		readonly uint start;
+		readonly uint end;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:MailKit.UniqueIdRange"/> class.

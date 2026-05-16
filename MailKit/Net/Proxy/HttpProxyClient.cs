@@ -185,24 +185,19 @@ namespace MailKit.Net.Proxy
 			try {
 				Send (socket, command, 0, command.Length, cancellationToken);
 
-				var builder = new ByteArrayBuilder (256);
+				using var builder = new ByteArrayBuilder (256);
 				var buffer = new byte[1];
 				var newline = false;
-				string response;
 
-				try {
-					// read until we consume the end of the headers
-					do {
-						int nread = Receive (socket, buffer, 0, 1, cancellationToken);
+				// read until we consume the end of the headers
+				do {
+					int nread = Receive (socket, buffer, 0, 1, cancellationToken);
 
-						if (nread < 1 || TryConsumeHeaders (builder, buffer[0], ref newline))
-							break;
-					} while (true);
+					if (nread < 1 || TryConsumeHeaders (builder, buffer[0], ref newline))
+						break;
+				} while (true);
 
-					response = builder.ToString ();
-				} finally {
-					builder.Dispose ();
-				}
+				var response = builder.ToString ();
 
 				ValidateHttpResponse (response, host, port);
 				return new NetworkStream (socket, true);
@@ -254,24 +249,19 @@ namespace MailKit.Net.Proxy
 			try {
 				await SendAsync (socket, command, 0, command.Length, cancellationToken).ConfigureAwait (false);
 
-				var builder = new ByteArrayBuilder (256);
+				using var builder = new ByteArrayBuilder (256);
 				var buffer = new byte[1];
 				var newline = false;
-				string response;
 
-				try {
-					// read until we consume the end of the headers
-					do {
-						int nread = await ReceiveAsync (socket, buffer, 0, 1, cancellationToken).ConfigureAwait (false);
+				// read until we consume the end of the headers
+				do {
+					int nread = await ReceiveAsync (socket, buffer, 0, 1, cancellationToken).ConfigureAwait (false);
 
-						if (nread < 1 || TryConsumeHeaders (builder, buffer[0], ref newline))
-							break;
-					} while (true);
+					if (nread < 1 || TryConsumeHeaders (builder, buffer[0], ref newline))
+						break;
+				} while (true);
 
-					response = builder.ToString ();
-				} finally {
-					builder.Dispose ();
-				}
+				var response = builder.ToString ();
 
 				ValidateHttpResponse (response, host, port);
 				return new NetworkStream (socket, true);

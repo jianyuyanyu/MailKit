@@ -927,7 +927,6 @@ namespace MailKit.Net.Smtp {
 			ValidateArguments (buffer, offset, count);
 
 			try {
-				var network = NetworkStream.Get (Stream);
 				int index = offset;
 				int left = count;
 

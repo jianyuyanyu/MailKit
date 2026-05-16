@@ -220,7 +220,7 @@ namespace MailKit.Net.Imap {
 
 	class PermanentFlagsResponseCode : ImapResponseCode
 	{
-		public HashSet<string> Keywords;
+		public readonly HashSet<string> Keywords;
 		public MessageFlags Flags;
 
 		internal PermanentFlagsResponseCode (ImapResponseCodeType type) : base (type, false)

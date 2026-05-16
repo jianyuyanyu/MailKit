@@ -282,7 +282,7 @@ namespace MailKit.Security.Ntlm {
 					avFlags = targetInfo.Flags.Value;
 
 				// If the CHALLENGE_MESSAGE TargetInfo field (section 2.2.1.2) has an MsvAvTimestamp present, the client SHOULD provide a MIC.
-				if (challenge.TargetInfo?.Timestamp != null) {
+				if (challenge.TargetInfo.Timestamp != null) {
 					// If there is an AV_PAIR structure (section 2.2.2.1) with the AvId field set to MsvAvFlags, then in the Value field, set bit 0x2 to 1.
 					// Else add an AV_PAIR structure and set the AvId field to MsvAvFlags and the Value field bit 0x2 to 1.
 					targetInfo.Flags = avFlags |= 0x2;

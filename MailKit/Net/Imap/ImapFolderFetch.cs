@@ -1794,12 +1794,12 @@ namespace MailKit.Net.Imap
 
 		class Section
 		{
-			public int Index;
+			public readonly int Index;
 			public UniqueId? UniqueId;
-			public Stream Stream;
-			public string Name;
-			public int Offset;
-			public int Length;
+			public readonly Stream Stream;
+			public readonly string Name;
+			public readonly int Offset;
+			public readonly int Length;
 
 			public Section (Stream stream, int index, UniqueId? uid, string name, int offset, int length)
 			{

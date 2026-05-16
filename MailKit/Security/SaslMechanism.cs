@@ -58,8 +58,8 @@ namespace MailKit.Security {
 		static readonly string[] RankedAuthenticationMechanisms;
 
 #if NET7_0_OR_GREATER
-		static Lazy<bool> NativeNtlmSupported = new Lazy<bool> (CheckNativeNtlmSupported, LazyThreadSafetyMode.ExecutionAndPublication);
-		static Lazy<bool> GssapiSupported = new Lazy<bool> (CheckGssapiSupported, LazyThreadSafetyMode.ExecutionAndPublication);
+		static readonly Lazy<bool> NativeNtlmSupported = new Lazy<bool> (CheckNativeNtlmSupported, LazyThreadSafetyMode.ExecutionAndPublication);
+		static readonly Lazy<bool> GssapiSupported = new Lazy<bool> (CheckGssapiSupported, LazyThreadSafetyMode.ExecutionAndPublication);
 #endif
 		static readonly bool Md5Supported;
 

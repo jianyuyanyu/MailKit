@@ -132,7 +132,7 @@ namespace MailKit.Net
 			if (send != null) {
 				send.Completed -= AsyncOperationCompleted;
 				send.AcceptSocket = null;
-				send?.Dispose ();
+				send.Dispose ();
 				send = null;
 			}
 

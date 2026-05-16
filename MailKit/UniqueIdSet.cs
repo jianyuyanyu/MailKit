@@ -44,8 +44,8 @@ namespace MailKit {
 	{
 		struct Range
 		{
-			public uint Start;
-			public uint End;
+			public readonly uint Start;
+			public readonly uint End;
 
 			public Range (uint start, uint end)
 			{
