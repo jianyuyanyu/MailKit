@@ -29,13 +29,9 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Net.Sockets;
-using System.Net.Security;
 using System.Threading.Tasks;
 
 using MimeKit.IO;
-
-using Buffer = System.Buffer;
-using NetworkStream = MailKit.Net.NetworkStream;
 
 namespace MailKit.Net.Smtp {
 	/// <summary>

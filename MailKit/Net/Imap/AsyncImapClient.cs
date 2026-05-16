@@ -30,6 +30,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Net.Sockets;
+using System.Net.Security;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -547,7 +548,7 @@ namespace MailKit.Net.Imap
 
 					if (ic.Response == ImapCommandResponse.Ok) {
 						try {
-							var tls = new SslStream (stream, false, ValidateRemoteCertificate);
+							var tls = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 							imap.SetStream (tls);
 
 							await SslHandshakeAsync (tls, host, cancellationToken).ConfigureAwait (false);
@@ -662,7 +663,7 @@ namespace MailKit.Net.Imap
 				engine.Uri = uri;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						await SslHandshakeAsync (ssl, host, cancellationToken).ConfigureAwait (false);
@@ -831,7 +832,7 @@ namespace MailKit.Net.Imap
 				engine.Uri = uri;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						await SslHandshakeAsync (ssl, host, cancellationToken).ConfigureAwait (false);

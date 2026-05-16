@@ -30,6 +30,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Net.Sockets;
+using System.Net.Security;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -331,7 +332,7 @@ namespace MailKit.Net.Pop3
 					await SendCommandAsync (cancellationToken, "STLS\r\n").ConfigureAwait (false);
 
 					try {
-						var tls = new SslStream (stream, false, ValidateRemoteCertificate);
+						var tls = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 						pop3.SetStream (tls);
 
 						await SslHandshakeAsync (tls, host, cancellationToken).ConfigureAwait (false);
@@ -434,7 +435,7 @@ namespace MailKit.Net.Pop3
 				engine.Uri = uri;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						await SslHandshakeAsync (ssl, host, cancellationToken).ConfigureAwait (false);
@@ -603,7 +604,7 @@ namespace MailKit.Net.Pop3
 				engine.Uri = uri;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						await SslHandshakeAsync (ssl, host, cancellationToken).ConfigureAwait (false);

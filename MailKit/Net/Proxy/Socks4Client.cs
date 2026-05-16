@@ -33,8 +33,6 @@ using System.Net.Sockets;
 using System.Globalization;
 using System.Threading.Tasks;
 
-using NetworkStream = MailKit.Net.NetworkStream;
-
 namespace MailKit.Net.Proxy
 {
 	/// <summary>

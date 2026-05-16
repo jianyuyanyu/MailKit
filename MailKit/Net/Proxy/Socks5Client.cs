@@ -35,8 +35,6 @@ using System.Threading.Tasks;
 
 using MailKit.Security;
 
-using NetworkStream = MailKit.Net.NetworkStream;
-
 namespace MailKit.Net.Proxy
 {
 	/// <summary>

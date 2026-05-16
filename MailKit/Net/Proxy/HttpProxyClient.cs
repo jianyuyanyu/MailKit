@@ -28,13 +28,9 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Buffers;
 using System.Threading;
-using System.Net.Sockets;
 using System.Globalization;
 using System.Threading.Tasks;
-
-using NetworkStream = MailKit.Net.NetworkStream;
 
 namespace MailKit.Net.Proxy
 {

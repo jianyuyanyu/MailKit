@@ -140,12 +140,12 @@
     <Compile Include="Net\Smtp\SmtpStatusCode.cs" />
     <Compile Include="Net\Smtp\SmtpStream.cs" />
     <Compile Include="Net\ClientMetrics.cs" />
+    <Compile Include="Net\ExtendedSslStream.cs" />
     <Compile Include="Net\IChannelBindingContext.cs" />
     <Compile Include="Net\NetworkOperation.cs" />
     <Compile Include="Net\NetworkStream.cs" />
     <Compile Include="Net\SocketMetrics.cs" />
     <Compile Include="Net\SocketUtils.cs" />
-    <Compile Include="Net\SslStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search\AnnotationSearchQuery.cs" />
     <Compile Include="Search\BinarySearchQuery.cs" />

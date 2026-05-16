@@ -35,8 +35,6 @@ using System.Collections.Generic;
 using MimeKit.IO;
 
 using Buffer = System.Buffer;
-using SslStream = MailKit.Net.SslStream;
-using NetworkStream = MailKit.Net.NetworkStream;
 
 namespace MailKit.Net.Imap {
 	/// <summary>

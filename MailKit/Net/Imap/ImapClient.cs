@@ -40,7 +40,6 @@ using System.Security.Cryptography.X509Certificates;
 
 using MailKit.Security;
 
-using SslStream = MailKit.Net.SslStream;
 using AuthenticationException = MailKit.Security.AuthenticationException;
 
 namespace MailKit.Net.Imap {
@@ -1489,7 +1488,7 @@ namespace MailKit.Net.Imap {
 
 					if (ic.Response == ImapCommandResponse.Ok) {
 						try {
-							var tls = new SslStream (stream, false, ValidateRemoteCertificate);
+							var tls = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 							imap.SetStream (tls);
 
 							SslHandshake (tls, host, cancellationToken);
@@ -1600,7 +1599,7 @@ namespace MailKit.Net.Imap {
 				engine.Uri = uri;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						SslHandshake (ssl, host, cancellationToken);
@@ -1780,7 +1779,7 @@ namespace MailKit.Net.Imap {
 				engine.Uri = uri;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						SslHandshake (ssl, host, cancellationToken);

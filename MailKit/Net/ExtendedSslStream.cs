@@ -32,12 +32,12 @@ using System.Security.Authentication.ExtendedProtection;
 
 namespace MailKit.Net
 {
-	class SslStream : System.Net.Security.SslStream, IChannelBindingContext
+	class ExtendedSslStream : SslStream, IChannelBindingContext
 	{
 		ChannelBinding? tlsServerEndPoint;
 		ChannelBinding? tlsUnique;
 
-		public SslStream (Stream innerStream, bool leaveInnerStreamOpen, RemoteCertificateValidationCallback userCertificateValidationCallback) : base (innerStream, leaveInnerStreamOpen, userCertificateValidationCallback)
+		public ExtendedSslStream (Stream innerStream, bool leaveInnerStreamOpen, RemoteCertificateValidationCallback userCertificateValidationCallback) : base (innerStream, leaveInnerStreamOpen, userCertificateValidationCallback)
 		{
 		}
 

@@ -274,7 +274,7 @@ namespace MailKit.Net
 				stream = compressed.InnerStream;
 #endif
 
-			if (stream is SslStream ssl)
+			if (stream is ExtendedSslStream ssl)
 				stream = ssl.InnerStream;
 
 			return stream as NetworkStream;

@@ -51,7 +51,6 @@ using MimeKit.Cryptography;
 
 using MailKit.Security;
 
-using SslStream = MailKit.Net.SslStream;
 using AuthenticationException = MailKit.Security.AuthenticationException;
 
 namespace MailKit.Net.Smtp {
@@ -1375,7 +1374,7 @@ namespace MailKit.Net.Smtp {
 						throw new SmtpCommandException (SmtpErrorCode.UnexpectedStatusCode, response.StatusCode, response.Response);
 
 					try {
-						var tls = new SslStream (stream, false, ValidateRemoteCertificate);
+						var tls = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 						Stream.SetStream (tls);
 
 						SslHandshake (tls, host, cancellationToken);
@@ -1507,7 +1506,7 @@ namespace MailKit.Net.Smtp {
 				stream.ReadTimeout = timeout;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						SslHandshake (ssl, host, cancellationToken);
@@ -1696,7 +1695,7 @@ namespace MailKit.Net.Smtp {
 				Stream network;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						SslHandshake (ssl, host, cancellationToken);

@@ -29,8 +29,9 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Net.Sockets;
 using System.Diagnostics;
+using System.Net.Sockets;
+using System.Net.Security;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -460,7 +461,7 @@ namespace MailKit.Net.Smtp
 						throw new SmtpCommandException (SmtpErrorCode.UnexpectedStatusCode, response.StatusCode, response.Response);
 
 					try {
-						var tls = new SslStream (stream, false, ValidateRemoteCertificate);
+						var tls = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 						Stream.SetStream (tls);
 
 						await SslHandshakeAsync (tls, host, cancellationToken).ConfigureAwait (false);
@@ -576,7 +577,7 @@ namespace MailKit.Net.Smtp
 				stream.ReadTimeout = timeout;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						await SslHandshakeAsync (ssl, host, cancellationToken).ConfigureAwait (false);
@@ -748,7 +749,7 @@ namespace MailKit.Net.Smtp
 				Stream network;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						await SslHandshakeAsync (ssl, host, cancellationToken).ConfigureAwait (false);

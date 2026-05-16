@@ -45,7 +45,6 @@ using MimeKit.IO;
 
 using MailKit.Security;
 
-using SslStream = MailKit.Net.SslStream;
 using AuthenticationException = MailKit.Security.AuthenticationException;
 
 namespace MailKit.Net.Pop3 {
@@ -1136,7 +1135,7 @@ namespace MailKit.Net.Pop3 {
 					SendCommand (cancellationToken, "STLS\r\n");
 
 					try {
-						var tls = new SslStream (stream, false, ValidateRemoteCertificate);
+						var tls = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 						pop3.SetStream (tls);
 
 						SslHandshake (tls, host, cancellationToken);
@@ -1238,7 +1237,7 @@ namespace MailKit.Net.Pop3 {
 				engine.Uri = uri;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						SslHandshake (ssl, host, cancellationToken);
@@ -1424,7 +1423,7 @@ namespace MailKit.Net.Pop3 {
 				engine.Uri = uri;
 
 				if (options == SecureSocketOptions.SslOnConnect) {
-					var ssl = new SslStream (stream, false, ValidateRemoteCertificate);
+					var ssl = new ExtendedSslStream (stream, false, ValidateRemoteCertificate);
 
 					try {
 						SslHandshake (ssl, host, cancellationToken);

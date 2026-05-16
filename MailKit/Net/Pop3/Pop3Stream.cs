@@ -34,8 +34,6 @@ using System.Threading.Tasks;
 using MimeKit.IO;
 
 using Buffer = System.Buffer;
-using SslStream = MailKit.Net.SslStream;
-using NetworkStream = MailKit.Net.NetworkStream;
 
 namespace MailKit.Net.Pop3 {
 	/// <summary>

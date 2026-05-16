@@ -27,20 +27,14 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Text;
-using System.Buffers;
 using System.Threading;
 using System.Net.Security;
-using System.Globalization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 
 using MailKit.Security;
-
-using SslStream = MailKit.Net.SslStream;
-using NetworkStream = MailKit.Net.NetworkStream;
 
 namespace MailKit.Net.Proxy {
 	/// <summary>
@@ -275,7 +269,7 @@ namespace MailKit.Net.Proxy {
 			cancellationToken.ThrowIfCancellationRequested ();
 
 			var socket = SocketUtils.Connect (ProxyHost, ProxyPort, LocalEndPoint, cancellationToken);
-			var ssl = new SslStream (new NetworkStream (socket, true), false, ValidateRemoteCertificate);
+			var ssl = new ExtendedSslStream (new NetworkStream (socket, true), false, ValidateRemoteCertificate);
 
 			try {
 #if NET5_0_OR_GREATER
@@ -351,7 +345,7 @@ namespace MailKit.Net.Proxy {
 			cancellationToken.ThrowIfCancellationRequested ();
 
 			var socket = await SocketUtils.ConnectAsync (ProxyHost, ProxyPort, LocalEndPoint, cancellationToken).ConfigureAwait (false);
-			var ssl = new SslStream (new NetworkStream (socket, true), false, ValidateRemoteCertificate);
+			var ssl = new ExtendedSslStream (new NetworkStream (socket, true), false, ValidateRemoteCertificate);
 
 			try {
 #if NET5_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER

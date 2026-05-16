@@ -34,9 +34,6 @@ using System.Collections.Generic;
 using MimeKit;
 using MimeKit.Utils;
 
-using SslStream = MailKit.Net.SslStream;
-using NetworkStream = MailKit.Net.NetworkStream;
-
 namespace MailKit.Net.Imap {
 	/// <summary>
 	/// An IMAP continuation handler.
